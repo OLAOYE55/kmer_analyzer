@@ -16,7 +16,7 @@ def validate_sequence(sequence, k):
         return False
     # Check each character to ensure it is a valid nucleotide
     for nucleotide in sequence:
-        if nucleotide in '1234567890':
+        if nucleotide not in 'ACGT':
             return False
     return True
 
@@ -34,7 +34,7 @@ def update_kmer_count(kmer_data, kmer, next_char):
     """
     # If this kmer hasn't been seen before, initialize its entry
     if kmer not in kmer_data:
-        kmer_data[kmer] = {'count': 1, 'next_chars': {}}
+        kmer_data[kmer] = {'count': 0, 'next_chars': {}}
     
     # Increment the total count for this kmer
     kmer_data[kmer]['count'] += 1
@@ -99,7 +99,7 @@ def write_results_to_file(kmer_data, output_filename):
             )
             
             # Write kmer and its next character frequencies to file
-            f.write(f"{kmer} {next_char_str}\n")
+            f.write(f"{kmer} {kmer_data[kmer]['count']} {next_char_str}\n")
 
 def main():
     """
@@ -118,6 +118,9 @@ def main():
     
     print(f"Reading sequences from {sequence_file}...")
 
+    # Initialize empty dictionary before processing all sequences
+    kmer_data = {}
+
     # Open and read each sequence from the input file
     with open(sequence_file, 'r') as f:
         for sequence in f:
@@ -129,11 +132,11 @@ def main():
                 print(f"  Warning: Skipping sequence")
                 continue
             
-            # Count kmers and their following characters
-            kmer_data = count_kmers_with_context(sequence, k) 
-            
-            # Write results to output file
-            write_results_to_file(kmer_data, output_file)
+            # Count kmers and accumulate results across all sequences
+            kmer_data = count_kmers_with_context(sequence, k)
+    
+    # Write all results to output file after processing all sequences
+    write_results_to_file(kmer_data, output_file)
 
 if __name__ == '__main__':
     main()
