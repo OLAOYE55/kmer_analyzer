@@ -1,0 +1,11 @@
+AA 3 A:1 T:2
+AG 1 C:1
+AT 5 C:3 G:2
+CG 3 A:3
+CT 3 A:1 G:2
+GA 4 A:2 T:2
+GC 2 T:2
+GT 2 C:2
+TA 1 G:1
+TC 5 G:3 T:2
+TG 4 A:1 C:1 T:2
