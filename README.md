@@ -15,3 +15,14 @@ python kmer_analyzer.py <sequence_file> <k> <output_file>
 
 ## Requirements
 - Python 3
+
+## Example
+python kmer_analyzer.py sequences.txt 2 output.txt
+
+## Testing
+Run tests using pytest:
+pytest test_kmer_analyzer.py
+
+## AI Use Statement
+Claude (Anthropic) was used as an assistant during the development of this 
+project. It helped explain confusing concepts and guide the work especially when I run into multiple errors in my code.
