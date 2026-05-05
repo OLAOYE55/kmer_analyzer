@@ -6,7 +6,7 @@ from a file, counts the frequency of each k-mer, and records which character
 follows each k-mer.
 
 ## Usage
-python kmer_analyzer.py <sequence_file> <k> <output_file>
+python3 kmer_analyzer.py <sequence_file> <k> <output_file>
 
 ## Arguments
 - sequence_file: path to input file containing DNA sequences
@@ -17,7 +17,7 @@ python kmer_analyzer.py <sequence_file> <k> <output_file>
 - Python 3
 
 ## Example
-python kmer_analyzer.py sequences.txt 2 output.txt
+python3 kmer_analyzer.py sequences.txt 2 output.txt
 
 ## Testing
 Run tests using pytest:
