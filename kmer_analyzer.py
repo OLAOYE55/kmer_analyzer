@@ -1,6 +1,15 @@
 import sys
-
 def validate_sequence(sequence, k):
+    """
+    Validates whether a DNA sequence is suitable for kmer analysis.
+    
+    Parameters:
+        sequence (str): A string representing a DNA sequence
+        k (int): The length of the kmer
+    
+    Returns:
+        bool: True if the sequence is valid, False otherwise
+    """
     if len(sequence) < k:
         return False
     for nucleotide in sequence:
@@ -9,6 +18,17 @@ def validate_sequence(sequence, k):
     return True
 
 def update_kmer_count(kmer_data, kmer, next_char):
+    """
+    Updates the kmer dictionary with a new occurrence of a kmer and its following character.
+    
+    Parameters:
+        kmer_data (dict): Dictionary storing kmer counts and next character frequencies
+        kmer (str): The kmer string to update
+        next_char (str): The character that follows the kmer in the sequence
+    
+    Returns:
+        dict: Updated kmer_data dictionary
+    """
     if kmer not in kmer_data:
         kmer_data[kmer] = {'count': 1, 'next_chars': {}}
     
@@ -21,6 +41,16 @@ def update_kmer_count(kmer_data, kmer, next_char):
     return kmer_data
 
 def count_kmers_with_context(sequence, k):
+    """
+    Extracts all kmers and their following characters from a DNA sequence.
+    
+    Parameters:
+        sequence (str): A valid DNA sequence string
+        k (int): The length of each kmer
+    
+    Returns:
+        dict: Dictionary containing kmer counts and next character frequencies
+    """
     kmer_data = {}
     
     for i in range(len(sequence) - k):
@@ -33,6 +63,16 @@ def count_kmers_with_context(sequence, k):
 
 
 def write_results_to_file(kmer_data, output_filename):
+    """
+    Writes kmer counts and next character frequencies to an output file.
+    
+    Parameters:
+        kmer_data (dict): Dictionary containing kmer counts and next character frequencies
+        output_filename (str): Path to the output file
+    
+    Returns:
+        None
+    """
     sorted_kmers = sorted(kmer_data.keys())
     
     with open(output_filename, 'w') as f:
@@ -48,6 +88,15 @@ def write_results_to_file(kmer_data, output_filename):
 
 
 def main():
+    """
+    Main function that reads sequences from a file and writes kmer analysis to output file.
+    
+    Parameters:
+        None
+    
+    Returns:
+        None
+    """
     sequence_file = sys.argv[1]
     k = int(sys.argv[2])
     output_file = sys.argv[3]
